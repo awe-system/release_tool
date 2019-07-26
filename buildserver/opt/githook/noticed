@@ -1,0 +1,4 @@
+#!/bin/bash
+
+nohup /bin/bash /opt/githook/build $@ > /dev/null 2>&1 & 
+

@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# An example hook script to blocks unannotated tags from entering.
+# Called by "git receive-pack" with arguments: refname sha1-old sha1-new
+#
+# To enable this hook, rename this file to "update".
+#
+# Config
+# ------
+# hooks.allowunannotated
+#   This boolean sets whether unannotated tags will be allowed into the
+#   repository.  By default they won't be.
+# hooks.allowdeletetag
+#   This boolean sets whether deleting tags will be allowed in the
+#   repository.  By default they won't be.
+# hooks.allowmodifytag
+#   This boolean sets whether a tag may be modified after creation. By default
+#   it won't be.
+# hooks.allowdeletebranch
+#   This boolean sets whether deleting branches will be allowed in the
+#   repository.  By default they won't be.
+# hooks.denycreatebranch
+#   This boolean sets whether remotely creating branches will be denied
+#   in the repository.  By default this is allowed.
+#
+refname="$1"
+oldrev="$2"
+newrev="$3"
+
+showmerge()
+{
+	echo "$1" | grep Merge |grep branch |  grep into
+}
+
+exit_with_msg()
+{
+	echo 'sbsbsbsbsbsbs输出必须满足包含以下行：'
+	echo '[任务]:'
+	echo '[描述]:'
+	echo '[类型]:feature/bug'
+	echo '[负责人]:'
+	echo '[开发]:'
+	echo '[测试]:'
+	echo '[测试类型]:unit/sanity/prepare/system'
+	exit 1
+}
+
+zero="0000000000000000000000000000000000000000"
+if [ "$newrev" = "$zero" ]; then
+        newrev_type=delete
+else
+        newrev_type=$(git cat-file -t $newrev)
+fi
+
+if [ "$newrev_type" == "commit" ];then
+# --- commit info rule
+	revs=$(git rev-list "$oldrev..$newrev")
+	for rev in $revs;do 
+		info=$(git cat-file commit $rev)
+		mergeinfo=$(showmerge "$info")
+		echo "merege_info:$mergeinfo"
+		echo "++++++++++++++++++++++++++++++"
+		if [ "$mergeinfo" == "" ];then
+			echo "$info"
+			echo "$info" | grep '\[任务\]:' || exit_with_msg
+			echo "$info" | grep '\[描述\]:' || exit_with_msg
+			echo "$info" | grep '\[类型\]:' || exit_with_msg
+			echo "$info" | grep 'feature' || echo "$info" | grep 'bug'   || exit_with_msg
+			echo "$info" | grep '\[负责人\]:' || exit_with_msg
+			echo "$info" | grep '\[开发\]:' || exit_with_msg
+			echo "$info" | grep '\[测试\]:' || exit_with_msg
+			echo "$info" | grep '\[测试类型\]:' || exit_with_msg
+			echo "$info" | grep 'unit' || echo "$info" | grep 'sanity'|| echo "$info" | grep 'prepare' || echo "$info" | grep 'system' || exit_with_msg
+		fi
+done
+# --- Finished
+	exit 0
+elif [ "$newrev_type" == "tag" ];then
+	/opt/githook/notice ${refname##refs/tags/}
+	exit 0
+fi

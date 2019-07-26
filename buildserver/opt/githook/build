@@ -1,0 +1,121 @@
+#!/bin/bash
+
+tagname=$1
+logpath=/mnt/share/3.project/iceberg/log/$tagname
+touch $logpath
+log()
+{
+#	tagname=$2
+	str=$1
+	echo -e "$str" >> $logpath
+}
+
+cllog()
+{
+#	tagname=$3
+	color=$1
+	str=$2
+	echo -e "$color$(date):$str\033[0m" >> $logpath
+	sync
+}
+
+myip=$(ifconfig | grep 172.30.41 | awk '{print $2}')
+gitrepo=$(cat /opt/githook/gitrepo)
+workdir="$(cat /opt/githook/workspace)/tmp"
+releasekey=$(cat /opt/githook/releasekeyword)
+deploykey=$(cat /opt/githook/deploykeyword)
+pkgdir=/mnt/share/3.project/iceberg/pkg
+choice=$(expr $(date "+%S") \% 6)
+if [ $choice == "0" ];then
+	color="\033[31m"
+elif [  $choice == "1" ]; then
+	color="\033[32m"
+elif [  $choice == "2" ];then
+	color="\033[33m"
+elif [  $choice == "3" ];then
+	color="\033[34m"
+elif [  $choice == "4" ];then
+	color="\033[35m"
+else
+	color="\033[36m"
+fi
+
+cllog $color "start" 
+log "$0 $*" 
+org_dir=$(pwd)
+mkdir -p $workdir
+cd $workdir
+
+sleep 5
+cllog $color "cd $(pwd)"
+if [ -d iceberg ];then
+	cd iceberg
+        log "YYYYYYYYYYYYYYY iceberg exist"
+	log "$(git checkout -- .)"
+	log "$(git pull --all)"
+        cllog $color "git pull --all : $(echo $?)"
+	log "$(git fetch --tag $tagname)"
+        cllog $color "git fetch --tag $tagname : $(echo $?)"
+else
+        log "NNNNNNNNNNNNNNNNNNNNN iceberg not exist gitrepo :\[$gitrepo\]"
+	cclog $color "$gitrepo"
+	cllog $color "$(git clone $gitrepo)" 
+	cllog $color "git clone res:$(echo $?)" 
+	cd iceberg
+fi
+cllog $color "cd $(pwd)"
+cllog $color "---------tagname:$tagname"
+taginfo=$(git tag -v $tagname)
+cllog $color "   ---------taginfo:$taginfo"
+commitid=$(git tag -v $tagname | grep object | awk '{print $2}')
+
+cllog $color "+++++++++++++ relase key : $releasekey  commitid : $commitid+++++++++++++++" 
+git tag -v $tagname | grep $releasekey | awk '{print $1}' 
+if [ "$(git tag -v $tagname | grep $releasekey | awk '{print $1}')" == "$releasekey" ];then 
+	echo -e "\033[31m++++++++++++++++++++++++++++++++\033[0m" >> $logpath
+	cllog $color "------$releasekey start" $logpath
+	log $(git checkout $commitid) 
+	destdir="$pkgdir/$tagname"
+	linkdir="$pkgdir/$commitid"
+	if [ -d $linkdir ];then
+		log "$commitid has been exist" 
+		log "$(git tag -d $tagname)" 
+		log "$(git push origin :refs/tags/$tagname)" 
+	else
+		cllog $color " new version release" 
+		mkdir -p $destdir
+		ln -sf $destdir $linkdir
+		echo $commitid > $destdir/commitid
+		echo $tagname > $destdir/tag
+		echo "$myip:5000" > $destdir/soft_repo
+		echo "echo $myip:5000 > $destdir/soft_repo" >> $logpath
+		sync
+		cllog $color "$(cat $destdir/soft_repo)"
+		echo "$destdir" >> $logpath
+		/bin/bash tool/build_test.sh $destdir  >> $logpath
+	fi
+elif [ "$(git tag -v $tagname | grep $deploykey | awk '{print $1}')" == "$deploykey" ];then
+	cllog $color " deploy" 
+	cllog $color "------$deploykey start" 
+	log $(git checkout $commitid) 
+	xmlpath=$(git tag -v $tagname | grep $deploykey | awk '{print $2}')
+	cllog $color $xmlpath 
+	linkdir="$pkgdir/$commitid"
+	if [ -d $linkdir ];then
+		log "version_tag:$version_tag" 
+		log "commitid:$commitid" 
+		#log "$(ls -l $pkgdir)"
+		/bin/bash tool/deploy_byxml.sh $xmlpath $linkdir 2>&1 >> $logpath
+	else
+		log "$commitid is not exist" 
+	fi
+        	log "$(git tag -d $tagname)" 
+		log "$(git push origin :refs/tags/$tagname)" 
+else
+	cllog $color "无关的tag" 
+fi
+
+
+cd $org_dir
+cllog $color "end" $tagname
+exit 0

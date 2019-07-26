@@ -1,0 +1,24 @@
+#!/bin/bash
+
+choice=$(expr $(date "+%S") \% 6)
+if [ $choice == "0" ];then
+	color="\033[31m"
+elif [  $choice == "1" ]; then
+	color="\033[32m"
+elif [  $choice == "2" ];then
+	color="\033[33m"
+elif [  $choice == "3" ];then
+	color="\033[34m"
+elif [  $choice == "4" ];then
+	color="\033[35m"
+else
+	color="\033[36m"
+fi
+buildip=$(cat /opt/githook/buildserver)
+
+touch /mnt/share/3.project/iceberg/log/git$(date "+%Y%m%d")
+
+echo -e "$color$(date) start\033[0m" >> /mnt/share/3.project/iceberg/log/git$(date "+%Y%m%d")
+echo "$0 ""$*" >> /mnt/share/3.project/iceberg/log/git$(date "+%Y%m%d")
+ssh root@$buildip "/opt/githook/noticed $@ "
+echo -e "$color$(date) end\033[0m" >> /mnt/share/3.project/iceberg/log/git$(date "+%Y%m%d")

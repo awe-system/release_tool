@@ -1,0 +1,14 @@
+ssh: /lib64/libcrypto.so.10: no version information available (required by ssh)
+ssh: /lib64/libcrypto.so.10: no version information available (required by ssh)
+ssh: /lib64/libcrypto.so.10: no version information available (required by ssh)
+ssh: /lib64/libssl.so.10: no version information available (required by /lib64/libldap-2.4.so.2)
+ssh: /lib64/libcrypto.so.10: no version information available (required by /lib64/libldap-2.4.so.2)
+error: no signature found
+error: 不能校验 tag 'v0.01'
+release
+error: no signature found
+error: 不能校验 tag 'v0.01'
+error: no signature found
+error: 不能校验 tag 'v0.01'
+error: no signature found
+error: 不能校验 tag 'v0.01'
