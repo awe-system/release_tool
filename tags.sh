@@ -8,5 +8,5 @@ project_dir=$1
 cd $project_dir  2>&1 > /dev/null
 
 git tag | grep -v vd > /tmp/gittags
-python $tooldir/show_branch.py /tmp/gittags
+python $tooldir/version_tags.py /tmp/gittags
 cd -  2>&1 > /dev/null

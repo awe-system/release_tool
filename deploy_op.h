@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QTextEdit>
 
+#include <lt_data/json_obj.h>
+
 namespace Ui {
 class deploy_op;
 }
@@ -30,13 +32,17 @@ private slots:
 
     void on_deploy_clicked();
 
+    void on_main_version_currentTextChanged(const QString &arg1);
+
 private:
     QString md5_log();
     void update_logs();
     void start_update_data();
     void alert(const QString &str);
     QString deply_xml_path();
-    void add_tags();
+//    void add_tags();
+    void add_mainversions();
+    void update_tags_by_by_mainversions();
     void update_tag_by_commit();
     void update_service_name();
     void update_commit_by_tag();
@@ -53,6 +59,7 @@ private:
     QString last_md5;
     QString basedir;
     int id;
+    json_obj version_map;
 };
 
 #endif // DEPLOY_OP_H

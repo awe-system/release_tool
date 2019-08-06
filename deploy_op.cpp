@@ -69,8 +69,11 @@ deploy_op::deploy_op(const QString &commit,QWidget *parent) :
     basedir = QDir::currentPath();
     ui->setupUi(this);
     ui->commit->setText(commit);
-    add_tags();
-    update_tag_by_commit();
+    //FIXME
+    add_mainversions();
+    update_tags_by_by_mainversions();
+//    add_tags();
+//    update_tag_by_commit();
     update_commit_by_tag();
     ui->whole->setChecked(true);
     update_service_name();
@@ -93,18 +96,57 @@ void deploy_op::alert(const QString &str)
 }
 
 
-void deploy_op::add_tags()
+//void deploy_op::add_tags()
+//{
+//    auto basedir = QDir::currentPath();
+//    auto cmd = basedir +"/../release_tool/tags.sh " + project_dir;
+//    std::string output;
+//    auto err = buf_exec_cpp(cmd.toStdString(),output);
+//    json_obj all_tags;
+//    try
+//    {
+//        all_tags.loads(output.c_str());
+//        for ( auto tag = all_tags.array_val.rbegin();
+//              tag != all_tags.array_val.rend(); ++tag)
+//        {
+//            ui->tag->addItem(QString(tag->s_val.c_str()));
+//        }
+//    }
+//    catch(...)
+//    {
+//        alert("there is no tag now");
+//    }
+//}
+
+void deploy_op::add_mainversions()
 {
     auto basedir = QDir::currentPath();
     auto cmd = basedir +"/../release_tool/tags.sh " + project_dir;
     std::string output;
     auto err = buf_exec_cpp(cmd.toStdString(),output);
-    json_obj all_tags;
     try
     {
-        all_tags.loads(output.c_str());
+        version_map.loads(output.c_str());
+        for ( auto tag = version_map.dic_val.rbegin();
+              tag != version_map.dic_val.rend(); ++tag)
+        {
+            ui->main_version->addItem(QString(tag->first.s_val.c_str()));
+        }
+    }
+    catch(...)
+    {
+        alert("there is no tag now");
+    }
+}
+
+void deploy_op::update_tags_by_by_mainversions()
+{
+    ui->tag->clear();
+    try
+   {
+       json_obj all_tags = version_map[ui->main_version->currentText().toStdString()];
         for ( auto tag = all_tags.array_val.rbegin();
-              tag != all_tags.array_val.rend(); ++tag)
+        tag != all_tags.array_val.rend(); ++tag)
         {
             ui->tag->addItem(QString(tag->s_val.c_str()));
         }
@@ -385,4 +427,9 @@ void deploy_op::start_update_data()
 {
     ui->deploy->setEnabled(false);
     id = startTimer(1000);
+}
+
+void deploy_op::on_main_version_currentTextChanged(const QString &arg1)
+{
+    update_tags_by_by_mainversions();
 }

@@ -31,16 +31,19 @@ SOURCES += \
         main_from.cpp \
     release_op.cpp \
     deploy_op.cpp \
-    project.cpp
+    project.cpp \
+    log_collect.cpp
 
 HEADERS += \
         main_from.h \
     release_op.h \
     deploy_op.h \
-    project.h
+    project.h \
+    log_collect.h
 
 FORMS += \
         main_from.ui \
     release_op.ui \
     deploy_op.ui \
-    project.ui
+    project.ui \
+    log_collect.ui

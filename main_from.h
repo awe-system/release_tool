@@ -14,6 +14,7 @@ class main_form : public QMainWindow
 private slots:
     void set_project();
     void release();
+    void log();
     void deploy();
 
     void on_commits_currentTextChanged(const QString &arg1);

@@ -1,4 +1,5 @@
 #include "deploy_op.h"
+#include "log_collect.h"
 #include "main_from.h"
 #include "project.h"
 #include "release_op.h"
@@ -25,6 +26,13 @@ void main_form::set_project()
 void main_form::release()
 {
     release_op * op = new release_op(ui->commits->currentText(),ui->mainversion->text());
+    op->exec();
+    checkout_branch();
+}
+
+void main_form::log()
+{
+    log_collect * op = new log_collect();
     op->exec();
     checkout_branch();
 }
@@ -176,6 +184,7 @@ main_form::main_form(QWidget *parent) :
     connect(ui->actionproject,SIGNAL(triggered()), this, SLOT(set_project()));
     connect(ui->actiondeploy,SIGNAL(triggered()), this, SLOT(deploy()));
     connect(ui->actionrelease,SIGNAL(triggered()), this, SLOT(release()));
+    connect(ui->actionlog,SIGNAL(triggered()), this, SLOT(log()));
     try_load_project_dir();
     ui->logs->setReadOnly(1);
     load_branch();

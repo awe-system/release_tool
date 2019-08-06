@@ -186,6 +186,7 @@ color: rgb(32, 74, 135);</string>
     </property>
     <addaction name="actionrelease"/>
     <addaction name="actiondeploy"/>
+    <addaction name="actionlog"/>
    </widget>
    <addaction name="menusetting"/>
    <addaction name="release"/>
@@ -218,6 +219,11 @@ color: rgb(32, 74, 135);</string>
   <action name="actiondeploy">
    <property name="text">
     <string>deploy</string>
+   </property>
+  </action>
+  <action name="actionlog">
+   <property name="text">
+    <string>log</string>
    </property>
   </action>
  </widget>
