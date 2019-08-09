@@ -34,6 +34,8 @@ private slots:
 
     void on_main_version_currentTextChanged(const QString &arg1);
 
+    void on_xml_currentIndexChanged(const QString &arg1);
+
 private:
     QString md5_log();
     void update_logs();

@@ -164,6 +164,32 @@ color: rgb(32, 74, 135);</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>70</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>testlink</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="link">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>70</y>
+      <width>341</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>link</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -186,10 +212,17 @@ color: rgb(32, 74, 135);</string>
     </property>
     <addaction name="actionrelease"/>
     <addaction name="actiondeploy"/>
-    <addaction name="actionlog"/>
+    <addaction name="actionswitch"/>
+   </widget>
+   <widget class="QMenu" name="menulog">
+    <property name="title">
+     <string>manage</string>
+    </property>
+    <addaction name="actionlog_2"/>
    </widget>
    <addaction name="menusetting"/>
    <addaction name="release"/>
+   <addaction name="menulog"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -222,6 +255,16 @@ color: rgb(32, 74, 135);</string>
    </property>
   </action>
   <action name="actionlog">
+   <property name="text">
+    <string>log</string>
+   </property>
+  </action>
+  <action name="actionswitch">
+   <property name="text">
+    <string>switch</string>
+   </property>
+  </action>
+  <action name="actionlog_2">
    <property name="text">
     <string>log</string>
    </property>

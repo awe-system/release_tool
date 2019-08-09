@@ -32,18 +32,24 @@ SOURCES += \
     release_op.cpp \
     deploy_op.cpp \
     project.cpp \
-    log_collect.cpp
+    log_collect.cpp \
+    switch_op.cpp \
+    time_counter.cpp
 
 HEADERS += \
         main_from.h \
     release_op.h \
     deploy_op.h \
     project.h \
-    log_collect.h
+    log_collect.h \
+    switch_op.h \
+    time_counter.h
 
 FORMS += \
         main_from.ui \
     release_op.ui \
     deploy_op.ui \
     project.ui \
-    log_collect.ui
+    log_collect.ui \
+    switch_op.ui \
+    time_counter.ui

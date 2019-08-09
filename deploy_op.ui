@@ -153,10 +153,10 @@ color: rgb(238, 238, 236);</string>
   <widget class="QPushButton" name="deploy">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>80</y>
+     <x>510</x>
+     <y>100</y>
      <width>84</width>
-     <height>41</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -240,6 +240,19 @@ color: rgb(136, 138, 133);</string>
      <width>131</width>
      <height>21</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="timing_tasks">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>70</y>
+     <width>111</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Timing tasks</string>
    </property>
   </widget>
  </widget>

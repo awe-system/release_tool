@@ -3,17 +3,38 @@
 #include "main_from.h"
 #include "project.h"
 #include "release_op.h"
+#include "switch_op.h"
 #include "ui_main_from.h"
 
 #include <QDir>
 #include <QMessageBox>
 #include <lt_data/json_obj.h>
 #include <lt_function/utils.h>
-
+#include <QtGui/QApplication>
+//#include <QWebView>
 
 QString project_dir="";
 static json_obj all_branches;
 static json_obj all_commits;
+
+
+main_form::main_form(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::main_from)
+{
+    ui->setupUi(this);
+    connect(ui->actionswitch,SIGNAL(triggered()), this, SLOT(switch_online()));
+    connect(ui->actionproject,SIGNAL(triggered()), this, SLOT(set_project()));
+    connect(ui->actiondeploy,SIGNAL(triggered()), this, SLOT(deploy()));
+    connect(ui->actionrelease,SIGNAL(triggered()), this, SLOT(release()));
+    connect(ui->actionlog_2,SIGNAL(triggered()), this, SLOT(log()));
+    try_load_project_dir();
+    ui->logs->setReadOnly(1);
+    load_branch();
+    setWindowTitle("Project:["+project_dir+"]");
+    ui->link->setOpenExternalLinks(true);
+    ui->link->setText("<a href=\"http://172.30.46.96/\">A URL for password-free login testing");
+}
 
 void main_form::set_project()
 {
@@ -33,6 +54,13 @@ void main_form::release()
 void main_form::log()
 {
     log_collect * op = new log_collect();
+    op->exec();
+    checkout_branch();
+}
+
+void main_form::switch_online()
+{
+    switch_op * op = new switch_op();
     op->exec();
     checkout_branch();
 }
@@ -176,20 +204,6 @@ void main_form::show_tag()
     ui->tag->setText(QString(output.c_str()));
 }
 
-main_form::main_form(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::main_from)
-{
-    ui->setupUi(this);
-    connect(ui->actionproject,SIGNAL(triggered()), this, SLOT(set_project()));
-    connect(ui->actiondeploy,SIGNAL(triggered()), this, SLOT(deploy()));
-    connect(ui->actionrelease,SIGNAL(triggered()), this, SLOT(release()));
-    connect(ui->actionlog,SIGNAL(triggered()), this, SLOT(log()));
-    try_load_project_dir();
-    ui->logs->setReadOnly(1);
-    load_branch();
-    setWindowTitle("Project:["+project_dir+"]");
-}
 
 main_form::~main_form()
 {

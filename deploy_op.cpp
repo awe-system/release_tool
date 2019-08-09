@@ -1,4 +1,5 @@
 #include "deploy_op.h"
+#include "time_counter.h"
 #include "ui_deploy_op.h"
 
 #include <lt_data/json_obj.h>
@@ -408,18 +409,29 @@ QString deploy_op::deply_xml_path()
 
 void deploy_op::on_deploy_clicked()
 {
-    auto basedir = QDir::currentPath();
-    auto cmd = basedir +"/../release_tool/deploy.sh " + project_dir + " " + deply_xml_path();
-    std::string output;
-    auto err = buf_exec_cpp(cmd.toStdString(),output);
-    if(err)
+    bool is_cancel = false;
+    if(ui->timing_tasks->isChecked())
     {
-        alert("deploy wrong:" + QString(output.c_str()));
+        time_counter * dia = new time_counter();
+        dia->exec();
+        is_cancel = dia->is_cancel;
+        delete dia;
     }
-    else
+    if(!is_cancel)
     {
-        ui->dtag->setText(QString(output.c_str()));
-        start_update_data();
+        auto basedir = QDir::currentPath();
+        auto cmd = basedir +"/../release_tool/deploy.sh " + project_dir + " " + deply_xml_path();
+        std::string output;
+        auto err = buf_exec_cpp(cmd.toStdString(),output);
+        if(err)
+        {
+            alert("deploy wrong:" + QString(output.c_str()));
+        }
+        else
+        {
+            ui->dtag->setText(QString(output.c_str()));
+            start_update_data();
+        }
     }
 }
 

@@ -16,6 +16,7 @@ private slots:
     void release();
     void log();
     void deploy();
+    void switch_online();
 
     void on_commits_currentTextChanged(const QString &arg1);
 
