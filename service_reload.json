@@ -1,0 +1,13 @@
+{
+  "minio": "reload_config",
+  "ccs_gateway": "reload_config",
+  "scheduler": "reload_config",
+  "auth": "reload_config",
+  "mds": "reload_config",
+  "metering": "reload_config",
+  "sdktool": "reload_config",
+  "gateway": "reload_config",
+  "ui": "reload_config",
+  "cache": "reload_conf",
+  "cold": "reload_conf"
+}

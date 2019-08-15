@@ -1,8 +1,10 @@
+#include "conf_edit.h"
 #include "deploy_op.h"
 #include "log_collect.h"
 #include "main_from.h"
 #include "project.h"
 #include "release_op.h"
+#include "shell.h"
 #include "switch_op.h"
 #include "ui_main_from.h"
 
@@ -28,6 +30,8 @@ main_form::main_form(QWidget *parent) :
     connect(ui->actiondeploy,SIGNAL(triggered()), this, SLOT(deploy()));
     connect(ui->actionrelease,SIGNAL(triggered()), this, SLOT(release()));
     connect(ui->actionlog_2,SIGNAL(triggered()), this, SLOT(log()));
+    connect(ui->actionedit,SIGNAL(triggered()), this, SLOT(configure_edit()));
+    connect(ui->actioncommands,SIGNAL(triggered()), this, SLOT(shell_cmd()));
     try_load_project_dir();
     ui->logs->setReadOnly(1);
     load_branch();
@@ -49,6 +53,7 @@ void main_form::release()
     release_op * op = new release_op(ui->commits->currentText(),ui->mainversion->text());
     op->exec();
     checkout_branch();
+    delete op;
 }
 
 void main_form::log()
@@ -56,6 +61,7 @@ void main_form::log()
     log_collect * op = new log_collect();
     op->exec();
     checkout_branch();
+    delete op;
 }
 
 void main_form::switch_online()
@@ -63,6 +69,22 @@ void main_form::switch_online()
     switch_op * op = new switch_op();
     op->exec();
     checkout_branch();
+    delete op;
+}
+
+void main_form::configure_edit()
+{
+    conf_edit * op = new conf_edit();
+    op->exec();
+
+    delete op;
+}
+
+void main_form::shell_cmd()
+{
+    shell * op = new shell();
+    op->exec();
+    delete op;
 }
 
 void main_form::deploy()
@@ -70,6 +92,8 @@ void main_form::deploy()
     deploy_op * op = new deploy_op(ui->commits->currentText());
     op->exec();
     checkout_branch();
+
+    delete op;
 }
 
 void main_form::alert(const QString &str)
@@ -79,6 +103,7 @@ void main_form::alert(const QString &str)
                                        QMessageBox::Critical,QMessageBox::Ok | QMessageBox::Default,
                                        QMessageBox::Cancel | QMessageBox::Escape,0);
     msg->show();
+
 }
 
 void main_form::try_load_project_dir()

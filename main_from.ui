@@ -219,6 +219,8 @@ color: rgb(32, 74, 135);</string>
      <string>manage</string>
     </property>
     <addaction name="actionlog_2"/>
+    <addaction name="actionedit"/>
+    <addaction name="actioncommands"/>
    </widget>
    <addaction name="menusetting"/>
    <addaction name="release"/>
@@ -267,6 +269,16 @@ color: rgb(32, 74, 135);</string>
   <action name="actionlog_2">
    <property name="text">
     <string>log</string>
+   </property>
+  </action>
+  <action name="actionedit">
+   <property name="text">
+    <string>edit</string>
+   </property>
+  </action>
+  <action name="actioncommands">
+   <property name="text">
+    <string>shell</string>
    </property>
   </action>
  </widget>

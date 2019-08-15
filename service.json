@@ -1,0 +1,13 @@
+{
+  "minio": "minio",
+  "ccs_gateway": "ccs_gateway",
+  "scheduler": "scheduler_service",
+  "auth": "auth_service",
+  "mds": "mds_service",
+  "metering": "metering_service",
+  "sdktool": "sdktool_service",
+  "gateway": "gateway",
+  "ui": "ui",
+  "cache": "cache",
+  "cold": "cold"
+}

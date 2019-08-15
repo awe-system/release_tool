@@ -34,7 +34,10 @@ SOURCES += \
     project.cpp \
     log_collect.cpp \
     switch_op.cpp \
-    time_counter.cpp
+    time_counter.cpp \
+    conf_edit.cpp \
+    exec_cmd.cpp \
+    shell.cpp
 
 HEADERS += \
         main_from.h \
@@ -43,7 +46,10 @@ HEADERS += \
     project.h \
     log_collect.h \
     switch_op.h \
-    time_counter.h
+    time_counter.h \
+    conf_edit.h \
+    exec_cmd.h \
+    shell.h
 
 FORMS += \
         main_from.ui \
@@ -52,4 +58,7 @@ FORMS += \
     project.ui \
     log_collect.ui \
     switch_op.ui \
-    time_counter.ui
+    time_counter.ui \
+    conf_edit.ui \
+    exec_cmd.ui \
+    shell.ui

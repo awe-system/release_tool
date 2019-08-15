@@ -1,0 +1,13 @@
+{
+  "minio": "get_config",
+  "ccs_gateway": "get_config",
+  "scheduler": "get_config",
+  "auth": "get_config",
+  "mds": "get_config",
+  "metering": "get_config",
+  "sdktool": "get_config",
+  "gateway": "get_config",
+  "ui": "get_config",
+  "cache": "get_conf",
+  "cold": "get_conf"
+}
