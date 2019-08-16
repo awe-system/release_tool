@@ -1,6 +1,5 @@
 #include "conf_edit.h"
 #include "exec_cmd.h"
-#include "file_uploading.h"
 #include "ui_conf_edit.h"
 
 #include <QDir>
