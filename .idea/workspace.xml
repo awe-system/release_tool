@@ -9,10 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9025d9a0-4cab-4cf5-8ea5-1bd68b36e2c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release_tool.pro.user" beforeDir="false" afterPath="$PROJECT_DIR$/release_tool.pro.user" afterDir="false" />
-    </list>
+    <list default="true" id="9025d9a0-4cab-4cf5-8ea5-1bd68b36e2c0" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,6 +209,7 @@
       <workItem from="1565748981404" duration="8663000" />
       <workItem from="1565861032876" duration="5572000" />
       <workItem from="1566371006889" duration="1239000" />
+      <workItem from="1566440325192" duration="523000" />
     </task>
     <task id="LOCAL-00001" summary="更新了&#10;1 日志模块 &#10;2 定时部署&#10;3 切换上线功能&#10;4 测试链接">
       <created>1565326986384</created>
@@ -234,11 +232,18 @@
       <option name="project" value="LOCAL" />
       <updated>1565922135852</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="更新了&#10;1 增加资源文件">
+      <created>1566440450015</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1566440450015</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66767000" />
+    <option name="totallyTimeSpent" value="67290000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -250,9 +255,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
+    <frame x="0" y="28" width="1920" height="1018" extended-state="7" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2684492" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27058825" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -265,8 +270,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49625668" visible="true" weight="0.20512821" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5037433" side_tool="true" visible="true" weight="0.20512821" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49572194" visible="true" weight="0.20251717" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50427806" side_tool="true" visible="true" weight="0.20251717" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -301,7 +306,8 @@
     <MESSAGE value="更新了&#10;1 日志模块 &#10;2 定时部署&#10;3 切换上线功能&#10;4 测试链接" />
     <MESSAGE value="更新了&#10;1 远程配置文件生效&#10;2 批量执行命令" />
     <MESSAGE value="更新了&#10;1 删除uploadfile.h" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新了&#10;1 删除uploadfile.h" />
+    <MESSAGE value="更新了&#10;1 增加资源文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新了&#10;1 增加资源文件" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/git_branches.sh" />
@@ -589,6 +595,11 @@
         <state relative-caret-position="182">
           <caret line="7" column="41" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="41" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release_tool.pro.user">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-468" />
       </provider>
     </entry>
   </component>
