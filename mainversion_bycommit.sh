@@ -5,8 +5,10 @@ tooldir=$(pwd)
 cd -  2>&1 > /dev/null
 project_dir=$1
 commit=$2
+branch=$(sh current_branch.sh ${project_dir})
 
 cd $project_dir  2>&1 > /dev/null
-
-git tag  --points-at $commit | grep -v vd || exit 1
+git checkout ${commit} version  2>&1 > /dev/null
+cat version
+git checkout ${branch} version  2>&1 > /dev/null
 cd -  2>&1 > /dev/null
