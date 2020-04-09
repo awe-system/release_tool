@@ -3,13 +3,14 @@ import json
 
 def get_main_version(tag):
     tag_array = tag.split('.')
-    if(len(tag_array) < 2):raise
+    if(len(tag_array) < 2):return ''
     new_array = tag_array[0:len(tag_array)-1]
     return '.'.join(new_array)
 
 def insert_into_map(map,newtag):
    # print newtag
     mainversion=get_main_version(newtag)
+    if (mainversion == ''): return map
    # print mainversion
     array = map.get(mainversion, [])
     if(array == []):

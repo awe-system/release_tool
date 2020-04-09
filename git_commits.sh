@@ -6,6 +6,6 @@ cd -  2>&1 > /dev/null
 project_dir=$1
 
 cd $project_dir  2>&1 > /dev/null
-git log  | grep 'commit ' > /tmp/gitcommits
+git log  | grep 'commit ' > ${tooldir}/gitcommits
 cd -  2>&1 > /dev/null
-python $tooldir/show_commit.py /tmp/gitcommits
+python $tooldir/show_commit.py ${tooldir}/gitcommits

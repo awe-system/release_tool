@@ -7,6 +7,6 @@ project_dir=$1
 
 cd $project_dir  2>&1 > /dev/null
 
-git tag | grep -v vd > /tmp/gittags
-python $tooldir/version_tags.py /tmp/gittags
+git tag | grep -v vd > ${tooldir}/gittags
+python $tooldir/version_tags.py ${tooldir}/gittags
 cd -  2>&1 > /dev/null

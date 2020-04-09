@@ -7,9 +7,9 @@ project_dir=$1
 
 cd $project_dir  2>&1 > /dev/null
 
-$tooldir/current_branch.sh $project_dir > /tmp/gitbranches
+$tooldir/current_branch.sh $project_dir > ${tooldir}/gitbranches
 git fetch --all 2>&1 > /dev/null
 
-git branch -a |grep -v '*'| grep remotes | awk '{print $1}' >> /tmp/gitbranches
+git branch -a |grep -v '*'| grep remotes | awk '{print $1}' >> ${tooldir}/gitbranches
 cd -  2>&1 > /dev/null
-python $tooldir/show_branch.py /tmp/gitbranches
+python $tooldir/show_branch.py ${tooldir}/gitbranches
